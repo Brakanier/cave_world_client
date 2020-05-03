@@ -25,7 +25,7 @@ export default {
     //   console.log(r)
     //   this.$store.commit('app/setToken', r.data)
     // })
-
+    console.log(this.$store)
     this.axios.get('/login/test', {
       params: {
         vk_id: 55811116

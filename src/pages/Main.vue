@@ -1,20 +1,17 @@
 <template>
   <v-app>
     <v-content>
-      <v-container>
+      <v-container class='py-0'>
+        <info-view :tab="tab"/>
         <v-tabs-items v-model="tab">
           <v-tab-item value="main">
-            <info-view />
-            <div>
-              <v-btn @click="extractWood">Добыть дерево</v-btn>
-              <v-btn @click="extractStone">Добыть камень</v-btn>
-            </div>
+            <main-panel />
+          </v-tab-item>
+          <v-tab-item value="build">
+            <build-panel />
           </v-tab-item>
           <v-tab-item value="citizens">
-            citizens
-          </v-tab-item>
-          <v-tab-item value="events">
-            events
+            <citizens-panel />
           </v-tab-item>
         </v-tabs-items>
       </v-container>
@@ -33,23 +30,26 @@
 
 <script>
 import InfoView from "@/components/InfoView";
-import { mapActions } from "vuex";
+import MainPanel from "@/panels/MainPanel"
+import BuildPanel from "@/panels/BuildPanel"
+import CitizensPanel from "@/panels/CitizensPanel"
 export default {
   components: {
-    InfoView
+    InfoView,
+    MainPanel,
+    BuildPanel,
+    CitizensPanel
   },
   data() {
     return {
       tab: "main",
-      items: ["main", "citizens", "events"]
+      items: ["main", "build", "citizens"]
     };
   },
   created() {
-    console.log(this.$store);
+
   },
-  methods: {
-    ...mapActions(["extractWood", "extractStone"])
-  }
+  
 };
 </script>
 
