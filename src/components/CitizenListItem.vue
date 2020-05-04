@@ -6,9 +6,13 @@
           </v-btn>
         </div>
         <div class="col-6 text-center">
-          <v-badge color="green" :content="`${count}`" inline>
+          <!-- <div><v-badge color="green" :content="`${count}`" inline>
             {{name}}
-          </v-badge>
+          </v-badge></div> -->
+          <div>{{name}} - <span class="count">{{count}} / {{maxCount}}</span></div>
+          <div class="description">
+            {{description}}
+          </div>
         </div>
         <div class="col-3">
           <v-btn height="50" min-width="40" class="pa-0" @click="plus">
@@ -22,13 +26,22 @@
 export default {
 props: {
         name: String,
+        description: String,
         count: Number,
+        maxCount: Number,
         plus: Function,
         minus: Function
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+.count {
+  font-weight: 700;
+}
+.description {
+  color: rgba(0,0,0,.6);
+  line-height: 1.2;
+  font-size: .875rem;
+}
 </style>

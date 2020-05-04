@@ -16,9 +16,19 @@ const citizen = (target, amount) => {
     return axios.get(`/citizen/${target}/${amount}`)
 }
 
+const find_enemies = () => {
+    return axios.get('/find')
+}
+
+const attack = (id) => {
+    return axios.get(`/attack/${id}`)
+}
+
 export {
     getData,
     extract,
     build,
-    citizen
+    citizen,
+    find_enemies,
+    attack
   };

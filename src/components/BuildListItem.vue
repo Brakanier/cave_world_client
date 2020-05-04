@@ -3,9 +3,10 @@
         <v-list-item-content>
           <v-list-item-title>
 
-            <v-badge color="green" :content="`${count}`" inline>
+            <!-- <v-badge color="green" :content="`${count}`" inline>
               {{name}}
-            </v-badge>
+            </v-badge> -->
+            <div>{{name}} - <span class="count">{{count}}</span></div>
           </v-list-item-title>
           <v-list-item-subtitle>
             <slot></slot>
@@ -29,6 +30,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.count {
+  font-weight: 700;
+}
 </style>

@@ -1,4 +1,7 @@
 export default {
+  terrain: 0,
+  terrain_free: 0,
+
   wood_store: 0,
   stone_store: 0,
   ore_store: 0,

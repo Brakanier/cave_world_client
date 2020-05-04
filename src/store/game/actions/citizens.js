@@ -9,12 +9,12 @@ export default {
     ) {
       citizen(`${target}_inwork`, amount).then(r => {
         commit("add", ["citizens_free", -amount]);
-        commit("add", ["wood_inwork", amount]);
+        commit("add", [`${target}_inwork`, amount]);
       });
     } else if (amount < 0 && state.data[`${target}_inwork`] + amount >= 0) {
       citizen(`${target}_inwork`, amount).then(r => {
         commit("add", ["citizens_free", -amount]);
-        commit("add", ["wood_inwork", amount]);
+        commit("add", [`${target}_inwork`, amount]);
       });
     }
   }
