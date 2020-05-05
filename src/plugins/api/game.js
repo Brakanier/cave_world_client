@@ -24,11 +24,16 @@ const attack = (id) => {
     return axios.get(`/attack/${id}`)
 }
 
+const battles = () => {
+    return axios.get('/battles')
+}
+
 export {
     getData,
     extract,
     build,
     citizen,
     find_enemies,
-    attack
+    attack,
+    battles
   };

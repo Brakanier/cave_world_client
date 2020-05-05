@@ -1,18 +1,18 @@
 <template>
   <v-list-item class="px-0">
-    <v-list-item-avatar size="80" class="my-0">
+    <v-list-item-avatar size="90" class="my-0 align-center">
       <v-img :src="user_avatar">
         <template v-slot:placeholder>
-          <v-icon size="100">mdi-account</v-icon>
+          <v-icon size="100">mdi-account-circle-outline</v-icon>
         </template>
       </v-img>
     </v-list-item-avatar>
 
-    <v-list-item-content class="align-center">
+    <v-list-item-content class="align-center py-0">
       <div>
-        Ник
+        <span class="title font-weight-bold">{{nickname}}</span>
+        
         <v-list-item-subtitle> Земли - {{ terrain }} </v-list-item-subtitle>
-        <v-list-item-subtitle> Трофеи - 0 </v-list-item-subtitle>
       </div>
     </v-list-item-content>
     <div>
@@ -33,6 +33,7 @@ export default {
   props: {
     vk_id: Number,
     terrain: Number,
+    nickname: String,
     attack: Function
   },
   data() {

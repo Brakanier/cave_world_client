@@ -9,20 +9,14 @@ import bridge from "@vkontakte/vk-bridge";
 export default {
   name: "App",
   components: {},
-  computed: {
-    token() {
-      return this.$store.state.app.token;
-    },
-    wood() {
-      return this.$store.state.store.wood;
-    }
-  },
   created() {
     if (window.location.href.includes("vk_")) {
       bridge.send("VKWebAppInit", {});
       this.axios.get("/login/vk" + window.location.search).then(r => {
         console.log(r);
-        this.$store.commit("app/setToken", r.data);
+        this.$store.commit("app/setToken", r.data.token);
+        this.$store.commit("app/setNickname", r.data.nickname);
+        this.$store.commit("app/setVkId", r.data.vk_id);
       });
     } else {
       this.axios
@@ -33,7 +27,9 @@ export default {
         })
         .then(r => {
           console.log(r);
-          this.$store.commit("app/setToken", r.data);
+          this.$store.commit("app/setToken", r.data.token);
+          this.$store.commit("app/setNickname", r.data.nickname);
+          this.$store.commit("app/setVkId", r.data.vk_id);
           this.$store.dispatch("updateData");
         });
     }

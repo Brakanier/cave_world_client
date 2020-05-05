@@ -1,5 +1,16 @@
 <template>
   <v-app>
+    <v-app-bar
+      app
+      dark
+      flat
+      color="rgba(0,0,0,.54)"
+      height="44"
+    >
+    <v-spacer></v-spacer>
+      <v-toolbar-title>Cave World Alpha</v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-app-bar>
     <v-content>
       <v-container class='py-0'>
         <info-view :tab="tab"/>
@@ -22,13 +33,6 @@
         </v-tabs-items>
       </v-container>
       <v-bottom-navigation fixed grow>
-        <!-- <v-tabs v-model="tab" centered grow hide-slider>
-          <v-tab v-for="item in items" :key="item.id" :href="'#'+item.id">
-            
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-tab>
-          
-        </v-tabs> -->
         <navigation-tabs v-model="tab" :items="items" />
       </v-bottom-navigation>
     </v-content>
@@ -70,7 +74,7 @@ export default {
           tab: "main"
         },
         {
-          icon: "mdi-bank-plus",
+          icon: "mdi-home-group",
           tab: "build"
         },
         {
