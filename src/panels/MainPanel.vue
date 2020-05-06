@@ -10,16 +10,21 @@
       </v-img>
       </v-card>
       <div class="col-12 text-center"><span class="title font-weight-bold" v-on:click="toggleNickname">{{nickname ? nickname : 'Введите ник'}}</span></div>
-      <div class="col-12">
+      <div class="col-12 text-center">
+        <span v-if="exp_percent < 100" class="text--secondary font-weight-bold">Уровень: {{level}}</span>
+        
+        <v-btn v-else class="my-3" color="green accent-3" @click="getLevelUp()">
+          <span class="font-weight-bold">Новый уровень</span>
+        </v-btn>
         <v-progress-linear
-        class="my-5"
-        color="orange"
+        class="mb-5 mt-1"
+        :color="exp_percent < 100 ? 'orange' : 'green accent-3'"
         height="25"
-        :value="expPercent"
+        :value="exp_percent"
         striped
       >
       <template>
-          <strong>{{expCurrent}} / {{expNeed}} xp</strong>
+          <strong>{{current_exp}} / {{need_exp}} xp</strong>
         </template>
       </v-progress-linear>
       </div>
@@ -68,21 +73,49 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="openLevelReward">
+      <v-card>
+        <v-card-title class="headline">Награда за уровень!</v-card-title>
+        
+        <v-card-text class="py-0">
+          <v-row>
+            <info-item
+              name="Энергия"
+              icon="mdi-flash"
+              :amount="10"
+            />
+            <info-item
+              name="Земли"
+              icon="mdi-image-filter-hdr"
+              :amount="10"
+            />
+          </v-row>
+          
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="toggleLevelReward">Ок</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import InfoItem from "@/components/InfoItem";
 export default {
-  components: {},
+  components: {
+    InfoItem
+  },
   data() {
     return {
-      expPercent: 30,
-      expCurrent: 125,
-      expNeed: 500,
       openSetNickname: false,
+      openLevelReward: false,
       localNickname: "",
-      rules: [v => v.length <= 15 || 'Максимальная длина 15 символов']
+      rules: [v => (v && v.length <= 15 || 'Максимальная длина 15 символов')],
+      levelReward: {}
     };
   },
   created() {
@@ -96,16 +129,41 @@ export default {
   computed: {
     ...mapState({
       nickname: state => state.app.nickname,
-    })
+      level: state => state.game.data.level,
+      current_exp: state => state.game.data.current_exp,
+      need_exp: state => state.game.data.need_exp,
+    }),
+    exp_percent() {
+      console.log(this.current_exp / this.need_exp)
+      return 100 * this.current_exp / this.need_exp;
+    }
   },
   methods: {
-    ...mapActions(["extract"]),
+    ...mapActions(["extract", "levelUp"]),
     toggleNickname() {
       this.openSetNickname = !this.openSetNickname
     },
     acceptNickname() {
-      this.$store.dispatch('app/newNickname', this.localNickname)
+      if (this.localNickname) {
+        this.$store.dispatch('app/newNickname', this.localNickname)
+      } else {
+        this.localNickname = this.$store.state.app.nickname
+      }
+      
     },
+    getLevelUp() {
+      this.levelUp().then(r => {
+        //this.levelReward = r.data.reward
+        this.openLevelReward = true
+        // this.$store.commit('add', ['energy', r.data.reward.energy])
+        // this.$store.commit('add', ['alchemy', r.data.reward.alchemy])
+        // this.$store.commit('add', ['gold', r.data.reward.gold])
+        // this.$store.commit('add', ['terrain', r.data.reward.terrain])
+      })
+    },
+    toggleLevelReward() {
+      this.openLevelReward = !this.openLevelReward
+    }
   }
 };
 </script>

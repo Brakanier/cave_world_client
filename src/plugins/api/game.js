@@ -4,6 +4,10 @@ const getData = () => {
     return axios.get('/data')
 }
 
+const levelUp = () => {
+    return axios.get('/level-up')
+}
+
 const extract = (target) => {
     return axios.get(`/extract/${target}`)
 }
@@ -35,5 +39,6 @@ export {
     citizen,
     find_enemies,
     attack,
-    battles
+    battles,
+    levelUp
   };

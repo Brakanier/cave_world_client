@@ -7,6 +7,8 @@ export default {
         console.log(`Extract ${target}`);
         commit("add", ["energy", -1]);
         commit("add", [target, 1]);
+        commit("add", ['exp', 1]);
+        commit("add", ['current_exp', 1]);
       });
     }
   }

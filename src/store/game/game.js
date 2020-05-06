@@ -1,4 +1,4 @@
-import { getData, extract, build } from "@/plugins/api/game";
+import { getData, extract, build, levelUp } from "@/plugins/api/game";
 import builds_state from "./states/builds";
 import store_state from "./states/store";
 import citizens_state from "./states/citizens";
@@ -15,7 +15,9 @@ export default {
   state: {
     data: {
       level: 0,
-      new_level: false,
+      exp: 0,
+      current_exp: 0,
+      need_exp: 0,
       energy: 0,
       ...citizens_state,
       ...store_state,
@@ -40,6 +42,9 @@ export default {
         console.log(r.data);
         commit("updateState", r.data);
       });
+    },
+    levelUp() {
+      return levelUp()
     },
     ...store_actions,
     ...builds_actions,
