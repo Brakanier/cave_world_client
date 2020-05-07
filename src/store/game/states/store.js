@@ -1,5 +1,9 @@
 export default {
     gold: 0,
+    trophy: 0,
+    terrain: 0,
+    terrain_free: 0,
+
 
     wood: 0,
     stone: 0,

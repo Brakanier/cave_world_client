@@ -16,7 +16,7 @@
               :key="enemy.user__id"
               :terrain="enemy.terrain"
               :nickname="enemy.user__nickname"
-              :attack="() => attack(enemy.user__id)"
+              :attack="() => {attack(enemy.user__id); toggleLastAttack()}"
             ></enemy-list-item>
           </v-list>
         </v-tab-item>
@@ -24,6 +24,53 @@
           <battle-history />
         </v-tab-item>
       </v-tabs-items>
+      <v-dialog v-model="openLastAttack">
+      <v-card v-if="lastAttack">
+        <v-card-title class="headline">{{lastAttack.win ? 'Победа!' : 'Поражение...'}}</v-card-title>
+        
+        <v-card-text class="py-0">
+          <v-row>
+            <info-item v-if="lastAttack.reward.wood"
+              name="Дерево"
+              icon="mdi-pine-tree"
+              :amount="lastAttack.reward.wood"
+            />
+            <info-item v-if="lastAttack.reward.stone"
+              name="Камень"
+              icon="mdi-collage"
+              :amount="lastAttack.reward.stone"
+            />
+            <info-item v-if="lastAttack.reward.iron"
+              name="Металл"
+              icon="mdi-gold"
+              :amount="lastAttack.reward.iron"
+            />
+            <info-item v-if="lastAttack.reward.orb"
+              name="Сферы"
+              icon="mdi-crystal-ball"
+              :amount="lastAttack.reward.orb"
+            />
+
+            <info-item v-if="lastAttack.reward.wood"
+              name="Трофеи"
+              icon="mdi-trophy"
+              :amount="lastAttack.reward.trophy"
+            />
+            <info-item v-if="lastAttack.reward.terrain"
+              name="Земли"
+              icon="mdi-image-filter-hdr"
+              :amount="lastAttack.reward.terrain"
+            />
+          </v-row>
+          
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="toggleLastAttack">Ок</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 
@@ -32,11 +79,13 @@ import { mapState, mapActions } from "vuex";
 import EnemyListItem from "@/components/EnemyListItem";
 import ButtonTabs from "@/components/ButtonTabs";
 import BattleHistory from '@/components/battle/BattleHistory'
+import InfoItem from "@/components/InfoItem";
 export default {
   components: {
     EnemyListItem,
     ButtonTabs,
-    BattleHistory
+    BattleHistory,
+    InfoItem
   },
   data() {
     return {
@@ -50,7 +99,8 @@ export default {
           name: "Сражения",
           tab: "battles"
         }
-      ]
+      ],
+      openLastAttack: false
     };
   },
   created() {
@@ -63,11 +113,15 @@ export default {
       found_enemies: state => state.game.found_enemies,
       warrior_inwork: state => state.game.data.warrior_inwork,
       archer_inwork: state => state.game.data.archer_inwork,
-      warlock_inwork: state => state.game.data.warlock_inwork
+      warlock_inwork: state => state.game.data.warlock_inwork,
+      lastAttack: state => state.game.lastAttack
     })
   },
   methods: {
-    ...mapActions(["findEnemies", "attack"])
+    ...mapActions(["findEnemies", "attack"]),
+    toggleLastAttack() {
+      this.openLastAttack = !this.openLastAttack
+    }
   }
 };
 </script>

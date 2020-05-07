@@ -32,7 +32,6 @@ export default {
     },
     updateState(state, newData) {
       state.data = { ...state.data, ...newData };
-      console.log(state.data.wood)
     },
   },
   actions: {

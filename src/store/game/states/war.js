@@ -1,3 +1,5 @@
 export default {
-    found_enemies: []
+    found_enemies: [],
+    battles: [],
+    lastAttack: null
 }

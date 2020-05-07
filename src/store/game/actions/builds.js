@@ -7,7 +7,8 @@ export default {
         commit("add", ['wood', -10]);
         commit("add", ['hut', 1]);
         commit("add", ['citizens_max', 1]);
-        commit("add", ['terrain_free', -1])
+        commit("add", ['citizens', 1])
+        commit("add", ['terrain_free', -1]);
       });
   },
   buildHouse({ commit, state }) {
@@ -17,6 +18,7 @@ export default {
         commit("add", ['stone', -15]);
         commit("add", ['house', 1]);
         commit("add", ['citizens_max', 5]);
+        commit("add", ['citizens', 5])
         commit("add", ['terrain_free', -1])
       });
   },
@@ -27,6 +29,7 @@ export default {
         commit("add", ['stone', -30]);
         commit("add", ['mansion', 1]);
         commit("add", ['citizens_max', 10]);
+        commit("add", ['citizens', 10])
         commit("add", ['terrain_free', -1])
       });
   },

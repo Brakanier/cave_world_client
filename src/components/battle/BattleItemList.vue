@@ -96,5 +96,6 @@ export default {
 <style scoped>
 .battle-list-item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
 }
 </style>

@@ -1,4 +1,4 @@
-import { find_enemies, attack } from "@/plugins/api/game";
+import { find_enemies, attack, battles } from "@/plugins/api/game";
 
 export default {
     findEnemies({ commit }) {
@@ -8,10 +8,23 @@ export default {
             commit('setFoundEnemies', r.data)
       });
     },
-    attack({commit}, id) {
+    attack({commit, dispatch}, id) {
         attack(id).then(r => {
             console.log('Attack')
             console.log(r.data)
+            commit('setLastAttack', r.data)
+            dispatch('updateBattles')
+            commit('add', ['wood', r.data.reward.wood])
+            commit('add', ['stone', r.data.reward.stone])
+            commit('add', ['orb', r.data.reward.orb])
+            commit('add', ['iron', r.data.reward.iron])
+            commit('add', ['trophy', r.data.reward.trophy])
+            commit('add', ['terrain', r.data.reward.terrain])
+        })
+    },
+    updateBattles({commit}) {
+        battles().then(r => {
+            commit('setBattles', r.data)
         })
     }
 };
