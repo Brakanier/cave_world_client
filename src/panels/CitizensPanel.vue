@@ -7,6 +7,7 @@
       <v-tab-item value="getting">
         <v-list three-line class="list-margin">
           <citizen-list-item
+          v-if="wood_work"
             name="Лесоруб"
             description="Добывает дерево 12 в час"
             :count="wood_inwork"
@@ -15,6 +16,7 @@
             :minus="() => citizen(['wood', -1])"
           />
           <citizen-list-item
+          v-if="stone_work"
             name="Каменолом"
             description="Добывает камень 12 в час"
             :count="stone_inwork"
@@ -23,6 +25,7 @@
             :minus="() => citizen(['stone', -1])"
           />
           <citizen-list-item
+          v-if="ore_work"
             name="Шахтер"
             description="Добывает руду 12 в час"
             :count="ore_inwork"
@@ -35,6 +38,7 @@
       <v-tab-item value="spec">
         <v-list three-line class="list-margin">
           <citizen-list-item
+          v-if="smith_work"
             name="Кузнец"
             description="Плавит руду в металл 6 в час"
             :count="smith_inwork"
@@ -43,6 +47,7 @@
             :minus="() => citizen(['smith', -1])"
           />
           <citizen-list-item
+          v-if="wizard_work"
             name="Чародей"
             description="Собирает стихии в сферы 6 в час"
             :count="wizard_inwork"
@@ -51,6 +56,7 @@
             :minus="() => citizen(['wizard', -1])"
           />
           <citizen-list-item
+          v-if="alchemist_work"
             name="Алхимик"
             description="Изучает алхимию 6 в час"
             :count="alchemist_inwork"
@@ -63,27 +69,30 @@
       <v-tab-item value="army">
         <v-list three-line class="list-margin">
         <citizen-list-item
+        v-if="warrior_work"
             name="Воин"
             description="Меч, щит и немного тупости"
             :count="warrior_inwork"
-            :maxCount="warrior_work"
+            :maxCount="warrior_max"
             :plus="() => citizen(['warrior', 1])"
             :minus="() => citizen(['warrior', -1])"
           />
         <citizen-list-item
+        v-if="archer_work"
             name="Лучник"
             description="Умеет стрелять из лука"
             :count="archer_inwork"
-            :maxCount="archer_work"
+            :maxCount="archer_max"
             :plus="() => citizen(['archer', 1])"
             :minus="() => citizen(['archer', -1])"
           />
         
         <citizen-list-item
+        v-if="warlock_work"
             name="Боевой маг"
             description="Жонглирует фаерболами"
             :count="warlock_inwork"
-            :maxCount="warlock_work"
+            :maxCount="warlock_max"
             :plus="() => citizen(['warlock', 1])"
             :minus="() => citizen(['warlock', -1])"
           />
@@ -105,20 +114,6 @@ export default {
   data() {
     return {
       tab: "getting",
-      items: [
-        {
-          name: "Добыча",
-          tab: "getting"
-        },
-        {
-          name: "Спец",
-          tab: "spec"
-        },
-        {
-          name: "Армия",
-          tab: "army"
-        }
-      ]
     };
   },
   computed: {
@@ -148,7 +143,31 @@ export default {
       warrior_inwork: state => state.game.data.warrior_inwork,
       archer_inwork: state => state.game.data.archer_inwork,
       warlock_inwork: state => state.game.data.warlock_inwork,
-    })
+
+      warrior_max: state => state.game.data.warrior_max,
+      archer_max: state => state.game.data.archer_max,
+      warlock_max: state => state.game.data.warlock_max
+    }),
+    items() {
+      let items = [{
+          name: "Добыча",
+          tab: "getting"
+        }]
+      if (this.smith_work) {
+        items.push({
+          name: "Спец",
+          tab: "spec"
+        })
+      }
+      if (this.warrior_work) {
+        items.push({
+          name: "Армия",
+          tab: "army"
+        })
+      }
+      
+      return items
+    }
   },
   methods: {
     ...mapActions(["citizen"])

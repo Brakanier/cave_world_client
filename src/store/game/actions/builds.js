@@ -7,6 +7,7 @@ export default {
         commit("add", ['wood', -10]);
         commit("add", ['hut', 1]);
         commit("add", ['citizens_max', 1]);
+        commit("add", ['citizens_free', 1])
         commit("add", ['citizens', 1])
         commit("add", ['terrain_free', -1]);
       });
@@ -18,6 +19,7 @@ export default {
         commit("add", ['stone', -15]);
         commit("add", ['house', 1]);
         commit("add", ['citizens_max', 5]);
+        commit("add", ['citizens_free', 5])
         commit("add", ['citizens', 5])
         commit("add", ['terrain_free', -1])
       });
@@ -29,6 +31,7 @@ export default {
         commit("add", ['stone', -30]);
         commit("add", ['mansion', 1]);
         commit("add", ['citizens_max', 10]);
+        commit("add", ['citizens_free', 10])
         commit("add", ['citizens', 10])
         commit("add", ['terrain_free', -1])
       });
@@ -125,6 +128,7 @@ export default {
         commit('add', ['wood', -10])
         commit('add', ['stone', -10])
         commit('add', ['warrior_work', 1])
+        commit("add", ['warrior_max', 5])
         commit("add", ['terrain_free', -1])
       })
     }
@@ -135,6 +139,7 @@ export default {
         commit('add', ['wood', -10])
         commit('add', ['stone', -10])
         commit('add', ['archer_work', 1])
+        commit("add", ['archer_max', 3])
         commit("add", ['terrain_free', -1])
       })
     }
@@ -145,6 +150,7 @@ export default {
         commit('add', ['wood', -10])
         commit('add', ['stone', -10])
         commit('add', ['warlock_work', 1])
+        commit("add", ['warlock_max', 1])
         commit("add", ['terrain_free', -1])
       })
     }

@@ -13,7 +13,7 @@
           nickname ? nickname : "Введите ник"
         }}</span>
       </div>
-      <div class="col-12 text-center" v-if="exp_percent">
+      <div class="col-12 text-center" v-if="exp_percent || exp_percent == 0">
         <span v-if="exp_percent < 100" class="text--secondary font-weight-bold"
           >Уровень: {{ level }}</span
         >
@@ -173,7 +173,6 @@ export default {
       need_exp: state => state.game.data.need_exp
     }),
     exp_percent() {
-      console.log(this.current_exp / this.need_exp);
       return (100 * this.current_exp) / this.need_exp;
     }
   },

@@ -1,7 +1,11 @@
 <template>
   <div class="margin-60">
     <v-row class="justify-center">
-      <v-btn @click="updateBattles">Обновить</v-btn>
+      <div class="d-flex">
+              <v-btn height="50" min-width="40" class="pa-0" @click="updateBattles">
+            <v-icon size="50">mdi-cached</v-icon>
+          </v-btn>
+        </div>
     </v-row>
 
     <battle-item-list
@@ -24,7 +28,7 @@ export default {
     return {};
   },
   created() {
-    this.updateBattles();
+    // this.updateBattles();
   },
   computed: {
     ...mapState({

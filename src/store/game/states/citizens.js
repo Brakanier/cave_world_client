@@ -14,5 +14,9 @@ export default {
     // Армия
     warrior: 0,
     archer: 0,
-    warlock: 0
+    warlock: 0,
+
+    warrior_max: 0,
+    archer_max: 0,
+    warlock_max: 0
 }

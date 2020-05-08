@@ -22,7 +22,7 @@ export default {
       this.axios
         .get("/login/test", {
           params: {
-            vk_id: 55811116
+            vk_id: 55811116 //324999104
           }
         })
         .then(r => {

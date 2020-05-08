@@ -1,26 +1,38 @@
 <template>
   <v-row v-on:click="expand = !expand" class="py-2 battle-list-item">
-    <div class="col-12 text-center pa-0 title">
-      {{ battle.win ? "Победа" : "Поражение" }}
+    <!-- <div v-if="win" class="col-12 text-center pa-0 title ">
+      Победа
     </div>
-    <div class="col-8 py-0 d-flex justify-center align-center">
-      <div v-if="vk_id == battle.attack__vk_id">
-        <span class="title font-weight-bold">{{
+    <div v-else class="col-12 text-center pa-0 title red--text">
+      Поражение
+    </div> -->
+    <div class="col-8 py-0 d-flex justify-start align-center">
+      <div>
+        <v-icon v-if="attack" size="50" color="green">mdi-sword-cross</v-icon>
+      <v-icon v-else size="50" color="red">mdi-shield</v-icon>
+      </div>
+      <div class="ml-3">
+        <div v-if="attack">
+        <span class="nickname font-weight-bold">{{
           battle.defender__nickname
         }}</span>
         <div>
-          Атака
+          Атака - {{win ? 'Победа' : 'Поражение'}}
         </div>
       </div>
       <div v-else>
-        <span class="title font-weight-bold">{{
+        <span class="nickname font-weight-bold">{{
           battle.attack__nickname
         }}</span>
-        <div>Защита</div>
+        <div>Защита - {{win ? 'Победа' : 'Поражение'}}</div>
+      </div>
+      <div>
+        {{time}}
+      </div>
       </div>
     </div>
     <div class="col-4 py-0 d-flex justify-center align-center">
-      <v-btn icon>
+      <v-btn icon v-if="win">
         <v-icon size="40" v-if="!expand">mdi-chevron-down</v-icon>
         <v-icon size="40" v-else>mdi-chevron-up</v-icon>
       </v-btn>
@@ -71,6 +83,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import InfoItem from "@/components/InfoItem";
 import { mapState } from "vuex";
 export default {
@@ -88,7 +101,16 @@ export default {
   computed: {
     ...mapState({
       vk_id: state => state.app.vk_id
-    })
+    }),
+    win() {
+      return this.battle.win && this.attack
+    },
+    attack() {
+      return this.battle.attack__vk_id == this.vk_id
+    },
+    time() {
+      return moment.unix(this.battle.time).add(moment().utcOffset(), 'minutes').format('DD.MM - hh:mm:ss')
+    }
   }
 };
 </script>
@@ -96,6 +118,5 @@ export default {
 <style scoped>
 .battle-list-item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-
 }
 </style>

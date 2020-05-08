@@ -4,16 +4,23 @@
       <v-tabs-items v-model="tab">
         <v-tab-item value="war">
           <v-row class="justify-center">
-            <div>
-              <div>Воины - {{ warrior_inwork }}</div>
-              <div>Лучники - {{ archer_inwork }}</div>
-              <div>Боевые маги - {{ warlock_inwork }}</div>
+            <div class="col-8">
+              <div class="text-center">Воины - {{ warrior_inwork }}</div>
+              <div class="text-center">Лучники - {{ archer_inwork }}</div>
+              <div class="text-center">Боевые маги - {{ warlock_inwork }}</div>
+            </div>
+            <div class="col-4">
+              <v-btn height="50" min-width="40" class="pa-0" @click="findEnemies">
+            <v-icon size="50">mdi-cached</v-icon>
+          </v-btn>
             </div>
           </v-row>
           <v-list three-line class="list-margin">
             <enemy-list-item
               v-for="enemy in found_enemies"
               :key="enemy.user__id"
+              :trophy="enemy.trophy"
+              :level="enemy.level"
               :terrain="enemy.terrain"
               :nickname="enemy.user__nickname"
               :attack="() => {attack(enemy.user__id); toggleLastAttack()}"
@@ -61,6 +68,11 @@
               icon="mdi-image-filter-hdr"
               :amount="lastAttack.reward.terrain"
             />
+            <info-item v-if="lastAttack.reward.exp"
+              name="Опыт"
+              icon="mdi-creation"
+              :amount="lastAttack.reward.exp"
+            />
           </v-row>
           
         </v-card-text>
@@ -105,8 +117,9 @@ export default {
   },
   created() {
     if (!this.$store.state.found_enemies) {
-      this.$store.dispatch("findEnemies");
+      this.findEnemies()
     }
+    this.updateBattles()
   },
   computed: {
     ...mapState({
@@ -115,10 +128,10 @@ export default {
       archer_inwork: state => state.game.data.archer_inwork,
       warlock_inwork: state => state.game.data.warlock_inwork,
       lastAttack: state => state.game.lastAttack
-    })
+    }),
   },
   methods: {
-    ...mapActions(["findEnemies", "attack"]),
+    ...mapActions(["findEnemies", "attack", 'updateBattles']),
     toggleLastAttack() {
       this.openLastAttack = !this.openLastAttack
     }
@@ -126,6 +139,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+.nickname {
+  font-size: 18px;
+}
 </style>

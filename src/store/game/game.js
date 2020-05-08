@@ -28,7 +28,12 @@ export default {
   mutations: {
     ...war_mutations,
     add(state, [target, amount]) {
-      state.data[target] += amount
+      if (target == 'wood' || target == 'stone') {
+        state.data[target] = Math.min(state.data[target] + amount, state.data[`${target}_max`])
+      } else {
+        state.data[target] += amount
+      }
+      
     },
     updateState(state, newData) {
       state.data = { ...state.data, ...newData };

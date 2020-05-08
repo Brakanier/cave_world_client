@@ -20,6 +20,8 @@ export default {
             commit('add', ['iron', r.data.reward.iron])
             commit('add', ['trophy', r.data.reward.trophy])
             commit('add', ['terrain', r.data.reward.terrain])
+            commit('add', ['exp', r.data.reward.exp])
+            commit('add', ['current_exp', r.data.reward.exp])
         })
     },
     updateBattles({commit}) {

@@ -9,6 +9,7 @@
         'col-3': items.length == 4,
         'col-4': items.length == 3,
         'col-6': items.length == 2,
+        'col-12': items.length == 1
       }"
       v-for="item in items"
       :key="item.tab"
