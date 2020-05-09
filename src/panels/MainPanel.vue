@@ -85,7 +85,7 @@
             label="Никнейм"
             v-model="localNickname"
             :rules="rules"
-            counter="15"
+            counter="18"
           ></v-text-field
         ></v-card-text>
         <v-card-actions>
@@ -153,7 +153,7 @@ export default {
       openSetNickname: false,
       openLevelReward: false,
       localNickname: "",
-      rules: [v => (v && v.length <= 15) || "Максимальная длина 15 символов"],
+      rules: [v => (v && v.length <= 18 && v.length >= 3) || "Максимальная длина 18 символов, минимальная 3"],
       levelReward: {}
     };
   },

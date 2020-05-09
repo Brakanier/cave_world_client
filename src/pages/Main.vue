@@ -61,7 +61,7 @@ export default {
     ...mapState({
       wood_work: state => state.game.data.wood_work,
       warrior_work: state => state.game.data.warrior_work,
-      alchemy_work: state => state.game.data.alchemy_work
+      alchemist_work: state => state.game.data.alchemist_work
     }),
     items() {
       let items = [];
@@ -71,7 +71,7 @@ export default {
           tab: "war"
         });
       }
-      if (this.alchemy_work) {
+      if (this.alchemist_work) {
         items.push({
           icon: "mdi-flask",
           tab: "alchemy"

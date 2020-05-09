@@ -22,6 +22,7 @@ export default {
             commit('add', ['terrain', r.data.reward.terrain])
             commit('add', ['exp', r.data.reward.exp])
             commit('add', ['current_exp', r.data.reward.exp])
+            dispatch('findEnemies')
         })
     },
     updateBattles({commit}) {

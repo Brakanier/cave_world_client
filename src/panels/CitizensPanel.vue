@@ -74,8 +74,8 @@
             description="Меч, щит и немного тупости"
             :count="warrior_inwork"
             :maxCount="warrior_max"
-            :plus="() => citizen(['warrior', 1])"
-            :minus="() => citizen(['warrior', -1])"
+            :plus="() => citizen_warrior(1)"
+            :minus="() => citizen_warrior(-1)"
           />
         <citizen-list-item
         v-if="archer_work"
@@ -83,8 +83,8 @@
             description="Умеет стрелять из лука"
             :count="archer_inwork"
             :maxCount="archer_max"
-            :plus="() => citizen(['archer', 1])"
-            :minus="() => citizen(['archer', -1])"
+            :plus="() => citizen_archer(1)"
+            :minus="() => citizen_archer(-1)"
           />
         
         <citizen-list-item
@@ -93,8 +93,8 @@
             description="Жонглирует фаерболами"
             :count="warlock_inwork"
             :maxCount="warlock_max"
-            :plus="() => citizen(['warlock', 1])"
-            :minus="() => citizen(['warlock', -1])"
+            :plus="() => citizen_warlock(1)"
+            :minus="() => citizen_warlock(-1)"
           />
         </v-list>
       </v-tab-item>
@@ -170,7 +170,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["citizen"])
+    ...mapActions(["citizen", 'citizen_warrior', 'citizen_archer', 'citizen_warlock'])
   }
 };
 </script>

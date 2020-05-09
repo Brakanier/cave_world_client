@@ -4,6 +4,8 @@ import store_state from "./states/store";
 import citizens_state from "./states/citizens";
 import war_state from './states/war'
 
+import builds_getters from './getters/builds'
+
 import war_mutations from './mutations/war'
 
 import store_actions from "./actions/store"
@@ -24,6 +26,9 @@ export default {
       ...builds_state
     },
     ...war_state
+  },
+  getters: {
+    ...builds_getters
   },
   mutations: {
     ...war_mutations,
@@ -46,6 +51,16 @@ export default {
         console.log(r.data);
         commit("updateState", r.data);
       });
+    },
+    incrementData({ commit, state }) {
+      console.log('inc')
+      commit('add', ['wood', state.data.wood_inwork * (0.2 / 60)])
+      commit('add', ['stone', state.data.stone_inwork * (0.2 / 60)])
+      let iron = state.data.ore >= 1 ? state.data.smith_inwork * (0.1 / 60) : 0
+      commit('add', ['ore', state.data.ore_inwork * (0.2 / 60) - iron])
+      commit('add', ['iron', iron])
+      commit('add', ['orb', state.data.wizard_inwork * (0.1 / 60)])
+      commit('add', ['alchemy', state.data.alchemist_inwork * (0.1 / 60)])
     },
     levelUp() {
       return levelUp()

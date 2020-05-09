@@ -17,12 +17,13 @@ export default {
         this.$store.commit("app/setToken", r.data.token);
         this.$store.commit("app/setNickname", r.data.nickname);
         this.$store.commit("app/setVkId", r.data.vk_id);
+        this.$store.dispatch("updateData");
       });
     } else {
       this.axios
         .get("/login/test", {
           params: {
-            vk_id: 55811116 //324999104
+            vk_id: 55811116//324999104
           }
         })
         .then(r => {
@@ -39,6 +40,12 @@ export default {
         this.$store.dispatch("updateData");
       }, 60000);
       this.$store.commit("app/setUpdateDataInterval", id);
+    }
+    if (!this.$store.state.app.incrementInterval) {
+      let id = setInterval(() => {
+        this.$store.dispatch("incrementData");
+      }, 1000);
+      this.$store.commit("app/setIncrementDataInterval", id);
     }
   }
 };

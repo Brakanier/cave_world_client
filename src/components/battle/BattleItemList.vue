@@ -38,43 +38,17 @@
       </v-btn>
     </div>
 
-    <v-expand-transition>
+    <v-expand-transition v-if="win">
+      
       <v-card flat v-show="expand" class="col-12 py-0">
         <div v-if="battle.reward" class="col-12 py-0">
-          <div class="col-12 py-1 text-center">
-            Награда
-          </div>
           <v-row class="pb-1">
-            <info-item
-              name="Трофеи"
-              icon="mdi-trophy"
-              :amount="battle.reward.trophy"
-            />
-            <info-item
-              name="Земли"
-              icon="mdi-image-filter-hdr"
-              :amount="battle.reward.terrain"
-            />
-            <info-item
-              name="Дерево"
-              icon="mdi-pine-tree"
-              :amount="battle.reward.wood"
-            />
-            <info-item
-              name="Камень"
-              icon="mdi-collage"
-              :amount="battle.reward.stone"
-            />
-            <info-item
-              name="Металл"
-              icon="mdi-gold"
-              :amount="battle.reward.iron"
-            />
-            <info-item
-              name="Сферы"
-              icon="mdi-crystal-ball"
-              :amount="battle.reward.orb"
-            />
+            <v-card-text class="py-0">
+              <battle-info :battle="battle" :attack="attack">
+
+      </battle-info>
+            </v-card-text>
+            
           </v-row>
         </div>
       </v-card>
@@ -84,11 +58,11 @@
 
 <script>
 import moment from 'moment'
-import InfoItem from "@/components/InfoItem";
+import BattleInfo from "@/components/battle/BattleInfo"
 import { mapState } from "vuex";
 export default {
   components: {
-    InfoItem
+    BattleInfo
   },
   props: {
     battle: Object
