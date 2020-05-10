@@ -8,8 +8,8 @@
     </div> -->
     <div class="col-8 py-0 d-flex justify-start align-center">
       <div>
-        <v-icon v-if="attack" size="50" color="green">mdi-sword-cross</v-icon>
-      <v-icon v-else size="50" color="red">mdi-shield</v-icon>
+        <v-icon v-if="attack" size="50" :color="win ? 'green' : 'red'">mdi-sword-cross</v-icon>
+      <v-icon v-else size="50" :color="win ? 'green' : 'red'">mdi-shield</v-icon>
       </div>
       <div class="ml-3">
         <div v-if="attack">
@@ -32,16 +32,16 @@
       </div>
     </div>
     <div class="col-4 py-0 d-flex justify-center align-center">
-      <v-btn icon v-if="win">
+      <v-btn icon>
         <v-icon size="40" v-if="!expand">mdi-chevron-down</v-icon>
         <v-icon size="40" v-else>mdi-chevron-up</v-icon>
       </v-btn>
     </div>
 
-    <v-expand-transition v-if="win">
+    <v-expand-transition>
       
       <v-card flat v-show="expand" class="col-12 py-0">
-        <div v-if="battle.reward" class="col-12 py-0">
+        <div class="col-12 py-0">
           <v-row class="pb-1">
             <v-card-text class="py-0">
               <battle-info :battle="battle" :attack="attack">
@@ -72,6 +72,11 @@ export default {
       expand: false
     };
   },
+  created() {
+    console.log('win', this.win)
+    console.log('attack', this.attack)
+    console.log(this.battle)
+  },
   computed: {
     ...mapState({
       vk_id: state => state.app.vk_id
@@ -83,7 +88,7 @@ export default {
       return this.battle.attack__vk_id == this.vk_id
     },
     time() {
-      return moment.unix(this.battle.time).add(moment().utcOffset(), 'minutes').format('DD.MM - hh:mm:ss')
+      return moment.unix(this.battle.time).add(moment().utcOffset(), 'minutes').format('DD.MM - HH:mm:ss')
     }
   }
 };

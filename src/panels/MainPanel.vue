@@ -2,7 +2,7 @@
   <v-card flat>
     <v-row no-gutters class="justify-center mt-5">
       <v-card flat>
-        <v-img min-height="100" min-width="100" :src="''">
+        <v-img min-height="100" min-width="100" class="rounded" :src="user_avatar">
           <template v-slot:placeholder>
             <v-icon size="100">mdi-account-circle-outline</v-icon>
           </template>
@@ -85,7 +85,7 @@
             label="Никнейм"
             v-model="localNickname"
             :rules="rules"
-            counter="18"
+            counter="15"
           ></v-text-field
         ></v-card-text>
         <v-card-actions>
@@ -142,6 +142,7 @@
 </template>
 
 <script>
+import bridge from "@vkontakte/vk-bridge";
 import { mapActions, mapState } from "vuex";
 import InfoItem from "@/components/InfoItem";
 export default {
@@ -153,12 +154,19 @@ export default {
       openSetNickname: false,
       openLevelReward: false,
       localNickname: "",
-      rules: [v => (v && v.length <= 18 && v.length >= 3) || "Максимальная длина 18 символов, минимальная 3"],
-      levelReward: {}
+      rules: [v => (v && v.length <= 15 && v.length >= 3) || "Максимальная длина 15 символов, минимальная 3"],
+      levelReward: {},
+      user_avatar: ""
     };
   },
   created() {
     this.localNickname = this.$store.state.app.nickname;
+    if (window.location.href.includes("vk_")  || process.env.NODE_ENV === 'production') {
+      bridge.send("VKWebAppGetUserInfo", {}).then(r => {
+        console.log(r);
+        this.user_avatar = r.photo_100;
+      });
+    }
   },
   watch: {
     nickname: function() {
@@ -207,4 +215,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.rounded {
+  border-radius: 50%!important;
+}
+</style>

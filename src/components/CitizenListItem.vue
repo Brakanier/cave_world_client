@@ -6,9 +6,6 @@
           </v-btn>
         </div>
         <div class="col-6 text-center">
-          <!-- <div><v-badge color="green" :content="`${count}`" inline>
-            {{name}}
-          </v-badge></div> -->
           <div>{{name}} - <span class="count">{{count}} / {{maxCount}}</span></div>
           <div class="description">
             {{description}}

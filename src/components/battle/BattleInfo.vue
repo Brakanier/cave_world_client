@@ -21,7 +21,7 @@
             <div class="col-3 py-0 text-center">{{ died("warlock") }}</div>
             <div class="col-3 py-0 text-center">{{ kills("warlock") }}</div>
           </v-row>
-          <div v-if="battle.win && attack" class="col-12 py-1 text-center">
+          <div v-if="battle.win && attack && battle.reward" class="col-12 py-1 text-center">
             Награда
           </div>
           <v-row v-if="battle.win && attack">

@@ -10,7 +10,7 @@ export default {
   name: "App",
   components: {},
   created() {
-    if (window.location.href.includes("vk_")) {
+    if (window.location.href.includes("vk_") || process.env.NODE_ENV === 'production') {
       bridge.send("VKWebAppInit", {});
       this.axios.get("/login/vk" + window.location.search).then(r => {
         console.log(r);

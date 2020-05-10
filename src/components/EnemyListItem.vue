@@ -61,10 +61,16 @@ export default {
   },
   created() {
     if (window.location.href.includes("vk_")) {
-      bridge.send("VKWebAppGetUserInfo", {}).then(r => {
-        console.log(r);
-        this.user_avatar = r.photo_100;
-      });
+      this.loadEnemyAvatar()
+    }
+  },
+  methods: {
+    loadEnemyAvatar() {
+      bridge.send("VKWebAppGetAuthToken", {"app_id": 7444052, "scope": ""}).then(r => {
+        bridge.send("VKWebAppCallAPIMethod", {"method": "users.get", "request_id": "enemy_avatars", "params": {"user_ids": this.vk_id, "fields": "photo_100", "v":"5.103", "access_token": r.access_token}}).then(r => {
+          this.user_avatar = r.response[0].photo_100
+        })
+      })
     }
   }
 };

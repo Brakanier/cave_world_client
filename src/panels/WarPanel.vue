@@ -19,14 +19,18 @@
           <enemy-list-item
             v-for="enemy in found_enemies"
             :key="enemy.user__id"
+            :vk_id="enemy.user__vk_id"
             :trophy="enemy.trophy"
             :level="enemy.level"
             :terrain="enemy.terrain"
             :nickname="enemy.user__nickname"
             :attack="
               () => {
-                attack(enemy.user__id);
-                toggleLastAttack();
+                attack(enemy.user__id).then(() => {
+                  toggleLastAttack()
+                }).catch(() => {
+                  findEnemies()
+                });
               }
             "
           ></enemy-list-item>
@@ -105,8 +109,6 @@ export default {
       vk_id: state => state.app.vk_id
     }),
     isAttack() {
-      console.log(this.lastAttack.attack__vk_id)
-      console.log(this.vk_id)
       return this.lastAttack.attack__vk_id == this.vk_id;
     },
   },

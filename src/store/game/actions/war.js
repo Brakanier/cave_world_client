@@ -9,21 +9,27 @@ export default {
       });
     },
     attack({commit, dispatch}, id) {
-        attack(id).then(r => {
-            console.log('Attack')
-            console.log(r.data)
-            commit('setLastAttack', r.data)
-            dispatch('updateBattles')
-            commit('add', ['wood', r.data.reward.wood])
-            commit('add', ['stone', r.data.reward.stone])
-            commit('add', ['orb', r.data.reward.orb])
-            commit('add', ['iron', r.data.reward.iron])
-            commit('add', ['trophy', r.data.reward.trophy])
-            commit('add', ['terrain', r.data.reward.terrain])
-            commit('add', ['exp', r.data.reward.exp])
-            commit('add', ['current_exp', r.data.reward.exp])
-            dispatch('findEnemies')
+        return new Promise((resolve, reject) => {
+            attack(id).then(r => {
+                console.log('Attack')
+                console.log(r.data)
+                commit('setLastAttack', r.data)
+                dispatch('updateBattles')
+                commit('add', ['wood', r.data.reward.wood])
+                commit('add', ['stone', r.data.reward.stone])
+                commit('add', ['orb', r.data.reward.orb])
+                commit('add', ['iron', r.data.reward.iron])
+                commit('add', ['trophy', r.data.reward.trophy])
+                commit('add', ['terrain', r.data.reward.terrain])
+                commit('add', ['exp', r.data.reward.exp])
+                commit('add', ['current_exp', r.data.reward.exp])
+                dispatch('findEnemies')
+                resolve(true)
+            }).catch(() => {
+                reject(false)
+            })
         })
+        
     },
     updateBattles({commit}) {
         battles().then(r => {
