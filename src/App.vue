@@ -6,11 +6,15 @@
 
 <script>
 import bridge from "@vkontakte/vk-bridge";
+import Connect from "@/plugins/websocket"
 export default {
   name: "App",
   components: {},
   created() {
-    if (window.location.href.includes("vk_") || process.env.NODE_ENV === 'production') {
+    if (
+      window.location.href.includes("vk_") ||
+      process.env.NODE_ENV === "production"
+    ) {
       bridge.send("VKWebAppInit", {});
       this.axios.get("/login/vk" + window.location.search).then(r => {
         console.log(r);
@@ -23,7 +27,7 @@ export default {
       this.axios
         .get("/login/test", {
           params: {
-            vk_id: 55811116//324999104
+            vk_id: 55811116 //324999104
           }
         })
         .then(r => {
@@ -32,21 +36,34 @@ export default {
           this.$store.commit("app/setNickname", r.data.nickname);
           this.$store.commit("app/setVkId", r.data.vk_id);
           this.$store.dispatch("updateData");
+          
+          let ws = new Connect('ws://127.0.0.1:8000/ws', r.data.token)
+          ws.onopen = () => {
+            console.log("OPEN");
+            ws.send({ data: "data" });
+          };
+          ws.onmessage = ({ data }) => {
+            console.log(data);
+          };
+          ws.onclose = () => {
+            console.log('CLOSE')
+          }
+          ws.open()
         });
     }
 
-    if (!this.$store.state.app.updateDataInterval) {
-      let id = setInterval(() => {
-        this.$store.dispatch("updateData");
-      }, 60000);
-      this.$store.commit("app/setUpdateDataInterval", id);
-    }
-    if (!this.$store.state.app.incrementInterval) {
-      let id = setInterval(() => {
-        this.$store.dispatch("incrementData");
-      }, 1000);
-      this.$store.commit("app/setIncrementDataInterval", id);
-    }
+    // if (!this.$store.state.app.updateDataInterval) {
+    //   let id = setInterval(() => {
+    //     this.$store.dispatch("updateData");
+    //   }, 60000);
+    //   this.$store.commit("app/setUpdateDataInterval", id);
+    // }
+    // if (!this.$store.state.app.incrementInterval) {
+    //   let id = setInterval(() => {
+    //     this.$store.dispatch("incrementData");
+    //   }, 1000);
+    //   this.$store.commit("app/setIncrementDataInterval", id);
+    // }
   }
 };
 </script>

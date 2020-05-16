@@ -8,8 +8,8 @@
     </div> -->
     <div class="col-8 py-0 d-flex justify-start align-center">
       <div>
-        <v-icon v-if="attack" size="50" :color="win ? 'green' : 'red'">mdi-sword-cross</v-icon>
-      <v-icon v-else size="50" :color="win ? 'green' : 'red'">mdi-shield</v-icon>
+        <v-icon v-if="attack" size="50" :color="this.battle.win ? 'green' : 'red'">mdi-sword-cross</v-icon>
+      <v-icon v-else size="50" :color="!this.battle.win ? 'green' : 'red'">mdi-shield</v-icon>
       </div>
       <div class="ml-3">
         <div v-if="attack">
@@ -17,14 +17,14 @@
           battle.defender__nickname
         }}</span>
         <div>
-          Атака - {{win ? 'Победа' : 'Поражение'}}
+          Атака - {{this.battle.win ? 'Победа' : 'Поражение'}}
         </div>
       </div>
       <div v-else>
         <span class="nickname font-weight-bold">{{
           battle.attack__nickname
         }}</span>
-        <div>Защита - {{win ? 'Победа' : 'Поражение'}}</div>
+        <div>Защита - {{!this.battle.win ? 'Победа' : 'Поражение'}}</div>
       </div>
       <div>
         {{time}}
@@ -82,7 +82,7 @@ export default {
       vk_id: state => state.app.vk_id
     }),
     win() {
-      return this.battle.win && this.attack
+      return this.battle.win && this.attack 
     },
     attack() {
       return this.battle.attack__vk_id == this.vk_id

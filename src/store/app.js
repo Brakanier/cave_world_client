@@ -6,7 +6,8 @@ export default {
     nickname: "",
     vk_id: null,
     updateDataInterval: null,
-    incrementDataInterval: null
+    incrementDataInterval: null,
+    connect: null
   },
   mutations: {
     setToken(state, token) {
