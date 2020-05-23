@@ -202,7 +202,6 @@ export default {
         this.levelReward = r.data;
         this.openLevelReward = true;
         this.$store.commit("add", ["energy", r.data.energy]);
-        this.$store.commit("add", ["alchemy", r.data.alchemy]);
         this.$store.commit("add", ["gold", r.data.gold]);
         this.$store.commit("add", ["terrain", r.data.terrain]);
         this.$store.dispatch("updateData");

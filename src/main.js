@@ -7,6 +7,10 @@ import vuetify from "@/plugins/vuetify";
 import axios from '@/plugins/axios'
 import VueAxios from 'vue-axios'
 
+import connect from "@/plugins/connect"
+
+Vue.prototype.$connect = connect
+
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios)

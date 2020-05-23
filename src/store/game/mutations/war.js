@@ -7,5 +7,11 @@ export default {
   },
   setLastAttack(state, attack) {
     state.lastAttack = attack
-  }
+  },
+  onAttack(state, data) {
+    state.lastOnAttack = data;
+  },
+  setIsOnAttack(state, is) {
+    state.isOnAttack = is;
+  },
 };

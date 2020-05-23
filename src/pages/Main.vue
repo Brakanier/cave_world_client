@@ -29,6 +29,25 @@
       <v-bottom-navigation fixed grow>
         <navigation-tabs v-model="tab" :items="items" />
       </v-bottom-navigation>
+      <v-dialog :value="isOnAttack" @input="(value) => setIsOnAttack(value)">
+      <v-card v-if="lastOnAttack">
+        <v-card-title class="headline">На нас напали!</v-card-title>
+        <v-card-subtitle class="headline">{{
+          lastOnAttack.win ? "Победа!" : "Поражение..."
+        }}</v-card-subtitle>
+        <v-card-text class="py-0">
+          <battle-info :battle="lastOnAttack" :attack="false">
+
+          </battle-info>
+
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text @click="() => setIsOnAttack(false)">Ок</v-btn>
+          <v-spacer></v-spacer>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     </v-content>
   </v-app>
 </template>
@@ -41,7 +60,7 @@ import BuildPanel from "@/panels/BuildPanel";
 import CitizensPanel from "@/panels/CitizensPanel";
 import AlchemyPanel from "@/panels/AlchemyPanel";
 import WarPanel from "@/panels/WarPanel";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   components: {
     NavigationTabs,
@@ -61,7 +80,9 @@ export default {
     ...mapState({
       wood_work: state => state.game.data.wood_work,
       warrior_work: state => state.game.data.warrior_work,
-      alchemist_work: state => state.game.data.alchemist_work
+      alchemist_work: state => state.game.data.alchemist_work,
+      isOnAttack: state => state.game.isOnAttack,
+      lastOnAttack: state => state.game.lastOnAttack
     }),
     items() {
       let items = [];
@@ -97,7 +118,10 @@ export default {
       return items;
     }
   },
-  created() {}
+  created() {},
+  methods: {
+    ...mapMutations(['setIsOnAttack'])
+  }
 };
 </script>
 

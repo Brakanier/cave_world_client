@@ -6,7 +6,6 @@
 
 <script>
 import bridge from "@vkontakte/vk-bridge";
-import Connect from "@/plugins/websocket"
 export default {
   name: "App",
   components: {},
@@ -21,7 +20,7 @@ export default {
         this.$store.commit("app/setToken", r.data.token);
         this.$store.commit("app/setNickname", r.data.nickname);
         this.$store.commit("app/setVkId", r.data.vk_id);
-        this.$store.dispatch("updateData");
+        this.$connect.open(r.data.token)
       });
     } else {
       this.axios
@@ -35,20 +34,9 @@ export default {
           this.$store.commit("app/setToken", r.data.token);
           this.$store.commit("app/setNickname", r.data.nickname);
           this.$store.commit("app/setVkId", r.data.vk_id);
-          this.$store.dispatch("updateData");
-          
-          let ws = new Connect('ws://127.0.0.1:8000/ws', r.data.token)
-          ws.onopen = () => {
-            console.log("OPEN");
-            ws.send({ data: "data" });
-          };
-          ws.onmessage = ({ data }) => {
-            console.log(data);
-          };
-          ws.onclose = () => {
-            console.log('CLOSE')
-          }
-          ws.open()
+          // this.$store.dispatch("updateData");
+
+          this.$connect.open(r.data.token)
         });
     }
 

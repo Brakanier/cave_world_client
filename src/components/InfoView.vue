@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters class="py-2">
-    <div class="data-info col-6">
+    <div class="data-info col-12">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-pine-tree</v-icon> Дерево</div>
         <div class="data-info_amount">
@@ -8,7 +8,7 @@
         </div>
       </v-row>
     </div>
-    <div class="data-info col-6">
+    <div class="data-info col-12">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-collage</v-icon> Камень</div>
         <div class="data-info_amount">
@@ -16,31 +16,31 @@
         </div>
       </v-row>
     </div>
-    <div class="data-info col-6">
+    <!-- <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-hexagon-multiple</v-icon> Руда</div>
         <div class="data-info_amount">{{ round(game.ore) }}</div>
       </v-row>
-    </div>
-    <div class="data-info col-6">
+    </div> -->
+    <div class="data-info col-12">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-gold</v-icon> Металл</div>
         <div class="data-info_amount">{{ round(game.iron) }}</div>
       </v-row>
     </div>
-    <div class="data-info col-6">
+    <!-- <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-crystal-ball</v-icon> Сферы</div>
         <div class="data-info_amount">{{ round(game.orb) }}</div>
       </v-row>
-    </div>
+    </div> -->
 
-    <div class="data-info col-6">
+    <!-- <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-flask</v-icon> Алхимия</div>
         <div class="data-info_amount">{{ round(game.alchemy) }}</div>
       </v-row>
-    </div>
+    </div> -->
 
     <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
@@ -59,14 +59,14 @@
       </v-row>
     </div>
 
-    <div v-if="false" class="data-info col-4">
+    <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-database</v-icon> Золото</div>
         <div class="data-info_amount">{{ round(game.gold) }}</div>
       </v-row>
     </div>
 
-    <div v-if="tab == 'build'" class="data-info col-12">
+    <div class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-image-filter-hdr</v-icon> Земли</div>
         <div class="data-info_amount">
@@ -75,15 +75,15 @@
       </v-row>
     </div>
 
-    <div v-if="tab == 'war'" class="data-info col-6">
+    <!-- <div v-if="tab == 'war'" class="data-info col-6">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-image-filter-hdr</v-icon> Земли</div>
         <div class="data-info_amount">
           {{ round(game.terrain_free) }} / {{ round(game.terrain) }}
         </div>
       </v-row>
-    </div>
-    <div v-if="tab == 'war'" class="data-info col-6">
+    </div> -->
+    <div v-if="tab == 'war'" class="data-info col-12">
       <v-row class="justify-space-between" no-gutters>
         <div><v-icon>mdi-trophy</v-icon> Трофеи</div>
         <div class="data-info_amount">{{ round(game.trophy) }}</div>

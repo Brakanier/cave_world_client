@@ -5,9 +5,8 @@ export default {
     token: "",
     nickname: "",
     vk_id: null,
-    updateDataInterval: null,
+    // updateDataInterval: null,
     incrementDataInterval: null,
-    connect: null
   },
   mutations: {
     setToken(state, token) {
@@ -19,9 +18,9 @@ export default {
     setVkId(state, vk_id) {
       state.vk_id = vk_id
     },
-    setUpdateDataInterval(state, id) {
-      state.updateDataInterval = id
-    },
+    // setUpdateDataInterval(state, id) {
+    //   state.updateDataInterval = id
+    // },
     setIncrementDataInterval(state, id) {
       state.incrementDataInterval = id
     }

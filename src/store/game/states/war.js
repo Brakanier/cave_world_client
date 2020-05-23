@@ -1,5 +1,8 @@
 export default {
     found_enemies: [],
     battles: [],
-    lastAttack: null
+    lastAttack: null,
+    isLastAttack: false,
+    lastOnAttack: null,
+    isOnAttack: false
 }

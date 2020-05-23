@@ -40,7 +40,7 @@
         <battle-history />
       </v-tab-item>
     </v-tabs-items>
-    <v-dialog v-model="openLastAttack">
+    <v-dialog :value="isLastAttack" @input="(value) => setIsLastAttack(value)">
       <v-card v-if="lastAttack">
         <v-card-title class="headline">{{
           lastAttack.win ? "Победа!" : "Поражение..."
@@ -53,7 +53,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="toggleLastAttack">Ок</v-btn>
+          <v-btn text @click="() => setIsLastAttack(false)">Ок</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -97,7 +97,6 @@ export default {
       this.findEnemies();
     }
     this.updateBattles();
-    console.log(this);
   },
   computed: {
     ...mapState({
@@ -106,6 +105,7 @@ export default {
       archer_inwork: state => state.game.data.archer_inwork,
       warlock_inwork: state => state.game.data.warlock_inwork,
       lastAttack: state => state.game.lastAttack,
+      isLastAttack: state => state.game.isLastAttack,
       vk_id: state => state.app.vk_id
     }),
     isAttack() {
@@ -113,7 +113,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["findEnemies", "attack", "updateBattles"]),
+    ...mapActions(["findEnemies", "attack", "updateBattles", "setIsLastAttack"]),
     toggleLastAttack() {
       this.openLastAttack = !this.openLastAttack;
     },

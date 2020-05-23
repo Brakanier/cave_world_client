@@ -74,7 +74,7 @@
             <div>- {{stone_work_wood}} дерева</div>
             <div>- {{stone_work_stone}} камня</div>
           </build-list-item>
-          <build-list-item
+          <!-- <build-list-item
             v-if="wood_work"
             name="Шахта"
             :count="ore_work"
@@ -84,7 +84,7 @@
             <div>+1 место шахтера</div>
             <div>- {{ore_work_wood}} дерева</div>
             <div>- {{ore_work_stone}} камня</div>
-          </build-list-item>
+          </build-list-item> -->
         </v-list>
       </v-tab-item>
       <v-tab-item value="spec">
@@ -101,7 +101,7 @@
             <div>- {{smith_work_stone}} камня</div>
             <div>- {{smith_work_ore}} руды</div>
           </build-list-item>
-          <build-list-item
+          <!-- <build-list-item
             v-if="smith_work"
             name="Алтарь"
             :count="wizard_work"
@@ -113,7 +113,7 @@
             <div>- {{wizard_work_stone}} камня</div>
             <div>- {{wizard_work_ore}} руды</div>
             <div>- {{wizard_work_iron}} металла</div>
-          </build-list-item>
+          </build-list-item> -->
           <build-list-item
             v-if="wizard_work"
             name="Лаборатория"
@@ -143,7 +143,7 @@
           <div>- {{warrior_work_stone}} камня</div>
           <div>- {{warrior_work_iron}} металла</div>
         </build-list-item>
-        <build-list-item
+        <!-- <build-list-item
           v-if="warrior_work"
           name="Стрельбище"
           :count="archer_work"
@@ -167,7 +167,7 @@
           <div>- {{warlock_work_stone}} камня</div>
           <div>- {{warlock_work_iron}} металла</div>
           <div>- {{warlock_work_orb}} сфер</div>
-        </build-list-item>
+        </build-list-item> -->
       </v-tab-item>
     </v-tabs-items>
   </v-card>

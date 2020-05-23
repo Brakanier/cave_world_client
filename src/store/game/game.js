@@ -1,4 +1,5 @@
 import { getData, extract, build, levelUp } from "@/plugins/api/game";
+
 import builds_state from "./states/builds";
 import store_state from "./states/store";
 import citizens_state from "./states/citizens";
@@ -21,6 +22,8 @@ export default {
       current_exp: 0,
       need_exp: 0,
       energy: 0,
+      isLevelUp: false,
+      levelUpData: null,
       ...citizens_state,
       ...store_state,
       ...builds_state
@@ -43,6 +46,12 @@ export default {
     updateState(state, newData) {
       state.data = { ...state.data, ...newData };
     },
+    setIsLevelUp(state, is) {
+      state.isLevelUp = is
+    },
+    setLevelUpData(state, data) {
+      state.levelUpData = data
+    }
   },
   actions: {
     updateData({ commit }) {
@@ -61,9 +70,6 @@ export default {
       commit('add', ['iron', iron])
       commit('add', ['orb', state.data.wizard_inwork * (0.1 / 60)])
       commit('add', ['alchemy', state.data.alchemist_inwork * (0.1 / 60)])
-    },
-    levelUp() {
-      return levelUp()
     },
     ...store_actions,
     ...builds_actions,

@@ -24,7 +24,7 @@
             :plus="() => citizen(['stone', 1])"
             :minus="() => citizen(['stone', -1])"
           />
-          <citizen-list-item
+          <!-- <citizen-list-item
           v-if="ore_work"
             name="Шахтер"
             description="Добывает руду 12 в час"
@@ -32,7 +32,7 @@
             :maxCount="ore_work"
             :plus="() => citizen(['ore', 1])"
             :minus="() => citizen(['ore', -1])"
-          />
+          /> -->
         </v-list>
       </v-tab-item>
       <v-tab-item value="spec">
@@ -46,7 +46,7 @@
             :plus="() => citizen(['smith', 1])"
             :minus="() => citizen(['smith', -1])"
           />
-          <citizen-list-item
+          <!-- <citizen-list-item
           v-if="wizard_work"
             name="Чародей"
             description="Собирает стихии в сферы 6 в час"
@@ -54,7 +54,7 @@
             :maxCount="wizard_work"
             :plus="() => citizen(['wizard', 1])"
             :minus="() => citizen(['wizard', -1])"
-          />
+          /> -->
           <citizen-list-item
           v-if="alchemist_work"
             name="Алхимик"
@@ -77,7 +77,7 @@
             :plus="() => citizen_warrior(1)"
             :minus="() => citizen_warrior(-1)"
           />
-        <citizen-list-item
+        <!-- <citizen-list-item
         v-if="archer_work"
             name="Лучник"
             description="Умеет стрелять из лука"
@@ -95,7 +95,7 @@
             :maxCount="warlock_max"
             :plus="() => citizen_warlock(1)"
             :minus="() => citizen_warlock(-1)"
-          />
+          /> -->
         </v-list>
       </v-tab-item>
     </v-tabs-items>
